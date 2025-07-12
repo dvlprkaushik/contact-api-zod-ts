@@ -8,7 +8,7 @@ export const validateBody = (schema: ZodSchema) => {
     if (!result.success) {
       return res.status(400).json({
         success: false,
-        message: "Validation Failed",
+        message: "Validation failed",
         errors: result.error.flatten().fieldErrors,
       });
     }
