@@ -8,8 +8,8 @@
     "build": "tsc && tsc-alias",
     "start": "node dist/index.js"
   },
-  "_moduleAliases" :{
-    "@" : "dist"
+  "_moduleAliases": {
+    "@": "dist"
   },
   "repository": {
     "type": "git",
