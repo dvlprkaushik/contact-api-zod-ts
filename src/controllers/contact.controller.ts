@@ -1,19 +1,20 @@
 import type { Contact, ContactForm } from "@/types/contact.types.js";
-import type { RequestHandler } from "express";
+import type { Request, Response } from "express";
 
 const CONTACT: Contact[] = [];
 
-export const createContact: RequestHandler<{}, {}, ContactForm> = (
-  req,
-  res
-) => {
+export const createContact = async (
+  req: Request<{}, {}, ContactForm>,
+  res: Response
+): Promise<void> => {
   const { name, email, message } = req.body;
 
   if (CONTACT.find((c) => c.email === email)) {
-    return res.status(400).json({
+    res.status(400).json({
       success: false,
       message: "Contact already exists",
     });
+    return;
   }
   const newContact: Contact = {
     name,
