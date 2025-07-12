@@ -20,6 +20,7 @@ export const createContact = async (
     name,
     email,
     message,
+    timestamp: new Date().toISOString(),
   };
   CONTACT.push(newContact);
   res.status(201).json({

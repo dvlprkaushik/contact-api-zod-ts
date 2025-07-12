@@ -50,8 +50,8 @@ Make sure you have the following installed:
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/your-username/contact-form-api.git
-cd contact-form-api
+git clone https://github.com/dvlprkaushik/contact-api-zod-ts.git
+cd contact-api-zod-ts
 npm install
 ```
 
@@ -72,7 +72,7 @@ npm start
 
 ## 📨 Usage
 
-Send a `POST` request to `/api/contact` with the following JSON body:
+Send a `POST` request to `/api/v1/contact` with the following JSON body:
 
 ```json
 {
@@ -118,7 +118,7 @@ If validation fails:
 
 | Method | Endpoint       | Description              | Parameters                        |
 | ------ | -------------- | ------------------------ | --------------------------------- |
-| POST   | `/api/contact` | Submits the contact form | `name`, `email`, `message` (body) |
+| POST   | `/api/v1/contact` | Submits the contact form | `name`, `email`, `message` (body) |
 
 ### Zod Validation Rules
 
@@ -133,25 +133,33 @@ If validation fails:
 ## 🗂️ Project Structure
 
 ```bash
-contact-form-api/
+contact-api-zod-ts/
 ├── src/
 │   ├── controllers/
 │   │   └── contact.controller.ts        # Handles form submission logic
+│   ├── middlewares/
+│   │   ├── endpointLogger.middleware.ts # Logs incoming request endpoints
+│   │   └── validate.middleware.ts       # validateBody(schema) middleware
 │   ├── routes/
 │   │   └── contact.routes.ts            # Defines POST /api/contact
-│   ├── validators/
-│   │   └── contact.validator.ts         # Zod schema + inferred types
-│   ├── middlewares/
-│   │   └── validate.middleware.ts       # validateBody(schema) middleware
 │   ├── types/
-│   │   └── HttpUtils.types.ts           # Status code enums, types
+│   │   └── contact.types.ts             # Custom types and interfaces
 │   ├── utils/
-│   │   ├── Response.ts                  # Standard response formatter
-│   │   └── AsyncHandler.ts              # Async error handler wrapper
+│   │   ├── AsyncHandler.ts              # Async error handler wrapper
+│   │   └── HealthCheck.ts              # Simple health check utility
+│   ├── validators/
+│   │   ├── contact.validator.ts         # Zod schema + inferred types
+│   │   ├── env.d.ts                     # Global environment type defs
+│   │   ├── index.ts                     # Validator index (optional exports)
+│   │   └── listener.ts                  # Handles app bootstrapping/listening
 │   └── index.ts                         # Entry point - Express app
-├── package.json
-├── tsconfig.json
 ├── .env
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── README.md
+├── tsconfig.json
+
 ```
 
 ---
@@ -173,7 +181,32 @@ BASE_URL=http://localhost
 For manual testing, use Postman, Thunder Client, or cURL to send POST requests to:
 
 ```
-http://localhost:3000/api/contact
+http://localhost:3000/api/v1/contact
+```
+
+### 📬 Example cURL Request with Success Response
+
+```bash
+curl -X POST http://localhost:3000/api/v1/contact \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Kaushik",
+    "email": "kaushik@example.com",
+    "message": "I would like to learn more about your services."
+  }'
+```
+
+```json
+{
+  "success": true,
+  "message": "Contact form submitted successfully.",
+  "data": {
+    "name": "Kaushik",
+    "email": "kaushik@example.com",
+    "message": "I would like to learn more about your services.",
+    "timestamp": "2025-07-12T18:30:00.000Z"
+  }
+}
 ```
 
 (Optional) You can write integration tests using Jest or Supertest (not included yet).
