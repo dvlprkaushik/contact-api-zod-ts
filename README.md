@@ -151,7 +151,7 @@ contact-api-zod-ts/
 │   │   └── contact.validator.ts         # Zod schema + inferred types
 │   ├── env.d.ts                         # Global environment type definitions
 │   ├── listener.ts                      # Server startup and listener
-│   └── index.ts                         # Entry point - Express app                        # Entry point - Express app
+│   └── index.ts                         # Entry point - Express app                        
 ├── .env
 ├── .gitignore
 ├── package-lock.json
