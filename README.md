@@ -148,11 +148,10 @@ contact-api-zod-ts/
 │   │   ├── AsyncHandler.ts              # Async error handler wrapper
 │   │   └── HealthCheck.ts              # Simple health check utility
 │   ├── validators/
-│   │   ├── contact.validator.ts         # Zod schema + inferred types
-│   │   ├── env.d.ts                     # Global environment type defs
-│   │   ├── index.ts                     # Validator index (optional exports)
-│   │   └── listener.ts                  # Handles app bootstrapping/listening
-│   └── index.ts                         # Entry point - Express app
+│   │   └── contact.validator.ts         # Zod schema + inferred types
+│   ├── env.d.ts                         # Global environment type definitions
+│   ├── listener.ts                      # Server startup and listener
+│   └── index.ts                         # Entry point - Express app                        # Entry point - Express app
 ├── .env
 ├── .gitignore
 ├── package-lock.json
