@@ -9,7 +9,7 @@ export const createContact = async (
 ): Promise<void> => {
   const { name, email, message } = req.body;
 
-  if (CONTACT.find((c) => c.email === email)) {
+  if (CONTACT.some((c) => c.email === email)) {
     res.status(400).json({
       success: false,
       message: "Contact already exists",
